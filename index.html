@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记账本</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            /* 柔和的浅米色背景 */
+            background-color: #f9f7f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            /* 纯白底色 + 轻微阴影 */
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            text-align: center;
+            /* 柔和的深灰色标题 */
+            color: #5a5a5a;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* 记账表单样式 */
+        .add-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            /* 极浅的蓝灰色表单背景 */
+            padding: 20px;
+            background: #e3e3f8;
+            border-radius: 6px;
+            border: 1px solid #eae7f2;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            /* 柔和的中灰色标签 */
+            color: #6b7280;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 8px 12px;
+            /* 浅灰色边框 */
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 14px;
+            /* 输入框内边距优化 */
+            background-color: white;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            /* 聚焦时柔和的蓝色边框 */
+            outline: none;
+            border-color: #e1c4ed;
+            box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.1);
+        }
+
+        button {
+            /* 柔和的蓝紫色主按钮 */
+            background-color: #c7b8ed;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+
+        button:hover {
+            /* hover时稍深的蓝紫色 */
+            background-color: #aa88d9;
+        }
+
+        /* 筛选区域样式 */
+        .filter-area {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-area input {
+            flex: 0 0 200px;
+        }
+
+        /* 统计区域样式 */
+        .stats-area {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            padding: 15px;
+            /* 柔和的淡紫色统计背景 */
+            background: #f5f3ff;
+            border-radius: 6px;
+            border: 1px solid #ede9fe;
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            /* 柔和的灰色小标题 */
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .stat-item p {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .income {
+            /* 柔和的薄荷绿（收入） */
+            color: #059669;
+        }
+
+        .expense {
+            /* 柔和的玫瑰色（支出） */
+            color: #e11d48;
+        }
+
+        .balance {
+            /* 柔和的靛蓝色（余额） */
+            color: #4f46e5;
+        }
+
+        /* 账单列表样式 */
+        .bill-list {
+            border: 1px solid #e3e0eb;
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .bill-header {
+            display: flex;
+            /* 浅灰色表头背景 */
+            background: #ececfc;
+            font-weight: 600;
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #4b5563;
+        }
+
+        .bill-row {
+            display: flex;
+            padding: 10px;
+            border-bottom: 1px solid #f3f4f6;
+            transition: background-color 0.2s;
+            color: #374151;
+        }
+
+        .bill-row:hover {
+            /* hover时极浅的灰色背景 */
+            background-color: #f8fafc;
+        }
+
+        .bill-row:last-child {
+            border-bottom: none;
+        }
+
+        .col-date {
+            flex: 0 0 120px;
+        }
+
+        .col-type {
+            flex: 0 0 80px;
+        }
+
+        .col-category {
+            flex: 0 0 100px;
+        }
+
+        .col-amount {
+            flex: 0 0 100px;
+            text-align: right;
+        }
+
+        .col-desc {
+            flex: 1;
+        }
+
+        .col-action {
+            flex: 0 0 80px;
+            text-align: center;
+        }
+
+        .delete-btn {
+            /* 柔和的红色删除按钮 */
+            color: #e11d48;
+            background: none;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .delete-btn:hover {
+            color: #b91c1c;
+            background: none;
+        }
+
+        /* 空数据提示 */
+        .empty-tip {
+            text-align: center;
+            padding: 40px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>记账本</h1>
+
+        <!-- 新增账单表单 -->
+        <div class="add-form">
+            <div class="form-group">
+                <label for="bill-date">日期</label>
+                <input type="date" id="bill-date" required>
+            </div>
+            <div class="form-group">
+                <label for="bill-type">类型</label>
+                <select id="bill-type" required>
+                    <option value="income">收入</option>
+                    <option value="expense">支出</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bill-category">分类</label>
+                <select id="bill-category" required>
+                    <option value="餐饮">餐饮</option>
+                    <option value="交通">交通</option>
+                    <option value="购物">购物</option>
+                    <option value="工资">工资</option>
+                    <option value="红包">红包</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bill-amount">金额</label>
+                <input type="number" id="bill-amount" step="0.01" min="0.01" required placeholder="请输入金额">
+            </div>
+            <div class="form-group">
+                <label for="bill-desc">备注</label>
+                <input type="text" id="bill-desc" placeholder="可选，例如：午餐、打车费">
+            </div>
+            <div class="form-group" style="flex: 0 0 100px;">
+                <label>&nbsp;</label>
+                <button id="add-bill-btn">添加账单</button>
+            </div>
+        </div>
+
+        <!-- 筛选区域 -->
+        <div class="filter-area">
+            <label for="filter-date">按日期筛选：</label>
+            <input type="date" id="filter-date">
+            <button id="filter-btn">筛选</button>
+            <button id="reset-filter-btn">重置</button>
+        </div>
+
+        <!-- 统计区域 -->
+        <div class="stats-area">
+            <div class="stat-item">
+                <h3>总收入</h3>
+                <p id="total-income" class="income">¥0.00</p>
+            </div>
+            <div class="stat-item">
+                <h3>总支出</h3>
+                <p id="total-expense" class="expense">¥0.00</p>
+            </div>
+            <div class="stat-item">
+                <h3>账户余额</h3>
+                <p id="total-balance" class="balance">¥0.00</p>
+            </div>
+        </div>
+
+        <!-- 账单列表 -->
+        <div class="bill-list">
+            <div class="bill-header">
+                <div class="col-date">日期</div>
+                <div class="col-type">类型</div>
+                <div class="col-category">分类</div>
+                <div class="col-amount">金额</div>
+                <div class="col-desc">备注</div>
+                <div class="col-action">操作</div>
+            </div>
+            <div id="bill-container">
+                <!-- 账单数据会通过JS动态生成 -->
+                <div class="empty-tip">暂无账单数据，快来添加你的第一笔账单吧！</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置默认日期为今天
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('bill-date').value = today;
+            document.getElementById('filter-date').value = today;
+
+            // 加载账单数据并渲染
+            loadBills();
+            
+            // 绑定添加账单事件
+            document.getElementById('add-bill-btn').addEventListener('click', addBill);
+            
+            // 绑定筛选事件
+            document.getElementById('filter-btn').addEventListener('click', filterBills);
+            document.getElementById('reset-filter-btn').addEventListener('click', resetFilter);
+        });
+
+        // 从本地存储获取账单数据
+        function getBills() {
+            const billsStr = localStorage.getItem('bills');
+            return billsStr ? JSON.parse(billsStr) : [];
+        }
+
+        // 保存账单数据到本地存储
+        function saveBills(bills) {
+            localStorage.setItem('bills', JSON.stringify(bills));
+        }
+
+        // 加载并渲染账单列表
+        function loadBills(filterDate = '') {
+            const bills = getBills();
+            const billContainer = document.getElementById('bill-container');
+            billContainer.innerHTML = '';
+
+            // 筛选账单（如果有筛选日期）
+            let filteredBills = bills;
+            if (filterDate) {
+                filteredBills = bills.filter(bill => bill.date === filterDate);
+            }
+
+            // 更新统计数据
+            updateStats(filteredBills);
+
+            // 渲染账单列表
+            if (filteredBills.length === 0) {
+                billContainer.innerHTML = '<div class="empty-tip">暂无账单数据</div>';
+                return;
+            }
+
+            // 按日期倒序排列（最新的在最上面）
+            filteredBills.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            filteredBills.forEach((bill, index) => {
+                const billRow = document.createElement('div');
+                billRow.className = 'bill-row';
+                billRow.innerHTML = `
+                    <div class="col-date">${bill.date}</div>
+                    <div class="col-type" style="color: ${bill.type === 'income' ? '#059669' : '#e11d48'}">
+                        ${bill.type === 'income' ? '收入' : '支出'}
+                    </div>
+                    <div class="col-category">${bill.category}</div>
+                    <div class="col-amount" style="color: ${bill.type === 'income' ? '#059669' : '#e11d48'}">
+                        ¥${parseFloat(bill.amount).toFixed(2)}
+                    </div>
+                    <div class="col-desc">${bill.desc || '-'}</div>
+                    <div class="col-action">
+                        <button class="delete-btn" data-index="${bill.id}">删除</button>
+                    </div>
+                `;
+                billContainer.appendChild(billRow);
+
+                // 绑定删除事件
+                billRow.querySelector('.delete-btn').addEventListener('click', function() {
+                    deleteBill(this.dataset.index);
+                });
+            });
+        }
+
+        // 添加新账单
+        function addBill() {
+            // 获取表单数据
+            const date = document.getElementById('bill-date').value;
+            const type = document.getElementById('bill-type').value;
+            const category = document.getElementById('bill-category').value;
+            const amount = document.getElementById('bill-amount').value;
+            const desc = document.getElementById('bill-desc').value;
+
+            // 简单验证
+            if (!date || !type || !category || !amount) {
+                alert('请填写完整的账单信息！');
+                return;
+            }
+
+            // 创建账单对象
+            const newBill = {
+                id: Date.now().toString(), // 用时间戳作为唯一ID
+                date,
+                type,
+                category,
+                amount,
+                desc
+            };
+
+            // 获取现有账单并添加新账单
+            const bills = getBills();
+            bills.push(newBill);
+
+            // 保存并重新加载
+            saveBills(bills);
+            loadBills(document.getElementById('filter-date').value);
+
+            // 清空金额和备注输入框
+            document.getElementById('bill-amount').value = '';
+            document.getElementById('bill-desc').value = '';
+
+            alert('账单添加成功！');
+        }
+
+        // 删除账单
+        function deleteBill(billId) {
+            if (!confirm('确定要删除这条账单吗？删除后无法恢复！')) {
+                return;
+            }
+
+            let bills = getBills();
+            bills = bills.filter(bill => bill.id !== billId);
+
+            saveBills(bills);
+            loadBills(document.getElementById('filter-date').value);
+        }
+
+        // 筛选账单
+        function filterBills() {
+            const filterDate = document.getElementById('filter-date').value;
+            loadBills(filterDate);
+        }
+
+        // 重置筛选
+        function resetFilter() {
+            document.getElementById('filter-date').value = '';
+            loadBills();
+        }
+
+        // 更新统计数据
+        function updateStats(bills) {
+            let totalIncome = 0;
+            let totalExpense = 0;
+
+            bills.forEach(bill => {
+                const amount = parseFloat(bill.amount);
+                if (bill.type === 'income') {
+                    totalIncome += amount;
+                } else {
+                    totalExpense += amount;
+                }
+            });
+
+            const balance = totalIncome - totalExpense;
+
+            // 更新页面显示
+            document.getElementById('total-income').textContent = `¥${totalIncome.toFixed(2)}`;
+            document.getElementById('total-expense').textContent = `¥${totalExpense.toFixed(2)}`;
+            document.getElementById('total-balance').textContent = `¥${balance.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
