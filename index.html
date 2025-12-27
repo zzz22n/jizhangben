@@ -13,7 +13,6 @@
         }
 
         body {
-            /* 柔和的浅米色背景 */
             background-color: #f9f7f4;
             padding: 20px;
         }
@@ -21,68 +20,169 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            /* 纯白底色 + 轻微阴影 */
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 15px rgba(0,0,0,0.05);
         }
 
+        /* 登录注册样式 */
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e3e0eb;
+        }
+
+        .auth-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .auth-tab.active {
+            border-bottom-color: #aa88d9;
+            color: #aa88d9;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: #e1c4ed;
+            box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.1);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #c7b8ed;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .auth-btn:hover {
+            background-color: #aa88d9;
+        }
+
+        .error-msg {
+            color: #e11d48;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* 用户信息栏 */
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e3e0eb;
+        }
+
+        .user-info span {
+            color: #5a5a5a;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            padding: 5px 15px;
+            background-color: #f5f3ff;
+            color: #aa88d9;
+            border: 1px solid #aa88d9;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            background-color: #aa88d9;
+            color: white;
+        }
+
         h1 {
             text-align: center;
-            /* 柔和的深灰色标题 */
             color: #5a5a5a;
             margin-bottom: 20px;
             font-weight: 600;
         }
 
-        /* 记账表单样式 */
         .add-form {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
             margin-bottom: 30px;
-            /* 极浅的蓝灰色表单背景 */
             padding: 20px;
             background: #e3e3f8;
             border-radius: 6px;
             border: 1px solid #eae7f2;
         }
 
-        .form-group {
-            flex: 1;
-            min-width: 120px;
-        }
-
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: 500;
-            /* 柔和的中灰色标签 */
             color: #6b7280;
         }
 
         input, select, button {
             width: 100%;
             padding: 8px 12px;
-            /* 浅灰色边框 */
             border: 1px solid #d1d5db;
             border-radius: 4px;
             font-size: 14px;
-            /* 输入框内边距优化 */
             background-color: white;
             transition: border-color 0.2s;
         }
 
         input:focus, select:focus {
-            /* 聚焦时柔和的蓝色边框 */
             outline: none;
             border-color: #e1c4ed;
             box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.1);
         }
 
         button {
-            /* 柔和的蓝紫色主按钮 */
             background-color: #c7b8ed;
             color: white;
             border: none;
@@ -92,29 +192,27 @@
         }
 
         button:hover {
-            /* hover时稍深的蓝紫色 */
             background-color: #aa88d9;
         }
 
-        /* 筛选区域样式 */
+        /* 优化筛选区域样式 - 新增分类筛选 */
         .filter-area {
             margin-bottom: 20px;
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
-        .filter-area input {
+        .filter-area input, .filter-area select {
             flex: 0 0 200px;
         }
 
-        /* 统计区域样式 */
         .stats-area {
             margin-bottom: 20px;
             display: flex;
             gap: 20px;
             padding: 15px;
-            /* 柔和的淡紫色统计背景 */
             background: #f5f3ff;
             border-radius: 6px;
             border: 1px solid #ede9fe;
@@ -126,7 +224,6 @@
         }
 
         .stat-item h3 {
-            /* 柔和的灰色小标题 */
             color: #6b7280;
             font-size: 14px;
             margin-bottom: 5px;
@@ -139,31 +236,84 @@
         }
 
         .income {
-            /* 柔和的薄荷绿（收入） */
             color: #059669;
         }
 
         .expense {
-            /* 柔和的玫瑰色（支出） */
             color: #e11d48;
         }
 
         .balance {
-            /* 柔和的靛蓝色（余额） */
             color: #4f46e5;
         }
 
-        /* 账单列表样式 */
+        /* 新增图表区域样式 - 调整为三图表布局 */
+        .charts-area {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f5f3ff;
+            border-radius: 6px;
+            border: 1px solid #ede9fe;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .chart-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        /* 月度统计图表卡片样式 */
+        .monthly-chart-card {
+            flex: 1 1 100%;
+            min-width: 580px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .chart-card h3, .monthly-chart-card h3 {
+            color: #6b7280;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .chart-container {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+        }
+
+        /* 月度图表容器样式 */
+        .monthly-chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        /* 空数据提示样式 */
+        .chart-empty-tip {
+            text-align: center;
+            padding: 40px 0;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
         .bill-list {
             border: 1px solid #e3e0eb;
             border-radius: 6px;
             overflow: hidden;
             background-color: white;
+            margin-top: 20px;
+            margin-bottom: 20px; /* 新增：增加账单列表底部间距，和图表区分开 */
         }
 
         .bill-header {
             display: flex;
-            /* 浅灰色表头背景 */
             background: #ececfc;
             font-weight: 600;
             padding: 10px;
@@ -180,7 +330,6 @@
         }
 
         .bill-row:hover {
-            /* hover时极浅的灰色背景 */
             background-color: #f8fafc;
         }
 
@@ -200,13 +349,16 @@
             flex: 0 0 100px;
         }
 
+        /* 优化金额列宽度，拉开和备注的间距 */
         .col-amount {
-            flex: 0 0 100px;
+            flex: 0 0 120px;
             text-align: right;
+            padding-right: 20px;
         }
 
         .col-desc {
             flex: 1;
+            padding-left: 10px;
         }
 
         .col-action {
@@ -215,7 +367,6 @@
         }
 
         .delete-btn {
-            /* 柔和的红色删除按钮 */
             color: #e11d48;
             background: none;
             border: none;
@@ -230,7 +381,6 @@
             background: none;
         }
 
-        /* 空数据提示 */
         .empty-tip {
             text-align: center;
             padding: 40px;
@@ -238,9 +388,63 @@
             font-size: 14px;
         }
     </style>
+    <!-- 引入Chart.js用于绘制圆形统计图 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
+    <!-- 登录注册界面 -->
+    <div id="auth-page" class="auth-container">
+        <div class="auth-tabs">
+            <div class="auth-tab active" id="login-tab">登录</div>
+            <div class="auth-tab" id="register-tab">注册</div>
+        </div>
+        
+        <!-- 登录表单 -->
+        <div class="auth-form active" id="login-form">
+            <div class="form-group">
+                <label for="login-username">用户名</label>
+                <input type="text" id="login-username" placeholder="请输入用户名" required>
+                <div class="error-msg" id="login-username-error">用户名不能为空</div>
+            </div>
+            <div class="form-group">
+                <label for="login-password">密码</label>
+                <input type="password" id="login-password" placeholder="请输入密码" required>
+                <div class="error-msg" id="login-password-error">密码不能为空</div>
+            </div>
+            <div class="error-msg" id="login-error">用户名或密码错误</div>
+            <button class="auth-btn" id="login-btn">登录</button>
+        </div>
+        
+        <!-- 注册表单 -->
+        <div class="auth-form" id="register-form">
+            <div class="form-group">
+                <label for="reg-username">用户名</label>
+                <input type="text" id="reg-username" placeholder="请设置用户名" required>
+                <div class="error-msg" id="reg-username-error">用户名不能为空</div>
+            </div>
+            <div class="form-group">
+                <label for="reg-password">密码</label>
+                <input type="password" id="reg-password" placeholder="请设置密码" required>
+                <div class="error-msg" id="reg-password-error">密码长度不能少于6位</div>
+            </div>
+            <div class="form-group">
+                <label for="reg-confirm">确认密码</label>
+                <input type="password" id="reg-confirm" placeholder="请再次输入密码" required>
+                <div class="error-msg" id="reg-confirm-error">两次输入的密码不一致</div>
+            </div>
+            <div class="error-msg" id="reg-error">用户名已存在</div>
+            <button class="auth-btn" id="register-btn">注册</button>
+        </div>
+    </div>
+
+    <!-- 记账本主界面（默认隐藏） -->
+    <div id="main-app" class="container" style="display: none;">
+        <!-- 用户信息栏 -->
+        <div class="user-info">
+            <span id="current-user">用户名</span>
+            <button class="logout-btn" id="logout-btn">退出登录</button>
+        </div>
+
         <h1>记账本</h1>
 
         <!-- 新增账单表单 -->
@@ -259,12 +463,13 @@
             <div class="form-group">
                 <label for="bill-category">分类</label>
                 <select id="bill-category" required>
+                    <!-- 初始显示支出分类，后续通过JS动态切换 -->
                     <option value="餐饮">餐饮</option>
                     <option value="交通">交通</option>
                     <option value="购物">购物</option>
-                    <option value="工资">工资</option>
-                    <option value="红包">红包</option>
-                    <option value="其他">其他</option>
+                    <option value="娱乐">娱乐</option>
+                    <option value="住房">住房</option>
+                    <option value="其他支出">其他支出</option>
                 </select>
             </div>
             <div class="form-group">
@@ -281,10 +486,17 @@
             </div>
         </div>
 
-        <!-- 筛选区域 -->
+        <!-- 优化筛选区域样式 - 新增分类筛选 -->
         <div class="filter-area">
             <label for="filter-date">按日期筛选：</label>
             <input type="date" id="filter-date">
+            
+            <label for="filter-category" style="margin-left: 10px;">按分类筛选：</label>
+            <select id="filter-category">
+                <option value="">全部分类</option>
+                <!-- 分类选项通过JS动态生成 -->
+            </select>
+            
             <button id="filter-btn">筛选</button>
             <button id="reset-filter-btn">重置</button>
         </div>
@@ -305,7 +517,7 @@
             </div>
         </div>
 
-        <!-- 账单列表 -->
+        <!-- 账单列表（移到图表区域前面） -->
         <div class="bill-list">
             <div class="bill-header">
                 <div class="col-date">日期</div>
@@ -316,20 +528,249 @@
                 <div class="col-action">操作</div>
             </div>
             <div id="bill-container">
-                <!-- 账单数据会通过JS动态生成 -->
                 <div class="empty-tip">暂无账单数据，快来添加你的第一笔账单吧！</div>
             </div>
         </div>
-    </div>
+
+        <!-- 调整后的图表区域 - 增加月度统计图表 -->
+        <div class="charts-area">
+            <!-- 收入占比图表 -->
+            <div class="chart-card">
+                <h3>收入分类占比</h3>
+                <div id="income-chart-container" class="chart-container">
+                    <div class="chart-empty-tip">暂无收入数据，无法生成图表</div>
+                </div>
+            </div>
+            
+            <!-- 支出占比图表 -->
+            <div class="chart-card">
+                <h3>支出分类占比</h3>
+                <div id="expense-chart-container" class="chart-container">
+                    <div class="chart-empty-tip">暂无支出数据，无法生成图表</div>
+                </div>
+            </div>
+            
+            <!-- 月度收支占比图表 -->
+            <div class="monthly-chart-card">
+                <h3>月度收入支出统计</h3>
+                <div id="monthly-chart-container" class="monthly-chart-container">
+                    <div class="chart-empty-tip">暂无账单数据，无法生成月度统计图表</div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- main-app容器闭合标签 -->
 
     <script>
+        // 全局变量
+        let currentUser = null;
+        let incomeChart = null; // 收入图表实例
+        let expenseChart = null; // 支出图表实例
+        let monthlyChart = null; // 月度收支图表实例
+        
+        // 定义分类数据
+        const categoryConfig = {
+            income: [
+                { value: "工资", text: "工资" },
+                { value: "奖金", text: "奖金" },
+                { value: "投资", text: "投资收益" },
+                { value: "红包", text: "红包/转账" },
+                { value: "兼职", text: "兼职收入" },
+                { value: "其他收入", text: "其他收入" }
+            ],
+            expense: [
+                { value: "餐饮", text: "餐饮" },
+                { value: "交通", text: "交通" },
+                { value: "购物", text: "购物" },
+                { value: "娱乐", text: "娱乐" },
+                { value: "住房", text: "住房" },
+                { value: "其他支出", text: "其他支出" }
+            ]
+        };
+
         // 初始化页面
         document.addEventListener('DOMContentLoaded', function() {
-            // 设置默认日期为今天
+            // 检查是否已登录
+            checkLoginStatus();
+            
+            // 绑定登录注册相关事件
+            bindAuthEvents();
+            
+            // 如果已登录，初始化记账本
+            if (currentUser) {
+                initBillApp();
+            }
+        });
+
+        // 检查登录状态
+        function checkLoginStatus() {
+            const loggedUser = localStorage.getItem('loggedUser');
+            if (loggedUser) {
+                currentUser = loggedUser;
+                // 隐藏登录页，显示主界面
+                document.getElementById('auth-page').style.display = 'none';
+                document.getElementById('main-app').style.display = 'block';
+                document.getElementById('current-user').textContent = `当前用户：${currentUser}`;
+            }
+        }
+
+        // 绑定登录注册事件
+        function bindAuthEvents() {
+            // 切换登录/注册标签
+            document.getElementById('login-tab').addEventListener('click', function() {
+                switchAuthTab('login');
+            });
+            document.getElementById('register-tab').addEventListener('click', function() {
+                switchAuthTab('register');
+            });
+
+            // 登录按钮
+            document.getElementById('login-btn').addEventListener('click', login);
+            
+            // 注册按钮
+            document.getElementById('register-btn').addEventListener('click', register);
+            
+            // 退出登录按钮
+            document.getElementById('logout-btn').addEventListener('click', logout);
+        }
+
+        // 切换登录/注册标签
+        function switchAuthTab(type) {
+            // 切换标签样式
+            document.getElementById('login-tab').classList.toggle('active', type === 'login');
+            document.getElementById('register-tab').classList.toggle('active', type === 'register');
+            
+            // 切换表单显示
+            document.getElementById('login-form').classList.toggle('active', type === 'login');
+            document.getElementById('register-form').classList.toggle('active', type === 'register');
+            
+            // 隐藏所有错误提示
+            hideAllErrorMsgs();
+        }
+
+        // 隐藏所有错误提示
+        function hideAllErrorMsgs() {
+            const errorMsgs = document.querySelectorAll('.error-msg');
+            errorMsgs.forEach(msg => {
+                msg.style.display = 'none';
+            });
+        }
+
+        // 获取所有用户
+        function getAllUsers() {
+            const usersStr = localStorage.getItem('users');
+            return usersStr ? JSON.parse(usersStr) : {};
+        }
+
+        // 保存用户信息
+        function saveUser(username, password) {
+            const users = getAllUsers();
+            users[username] = password;
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // 注册
+        function register() {
+            hideAllErrorMsgs();
+            
+            const username = document.getElementById('reg-username').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const confirmPwd = document.getElementById('reg-confirm').value;
+            
+            // 验证用户名
+            if (!username) {
+                showError('reg-username-error');
+                return;
+            }
+            
+            // 验证密码长度
+            if (password.length < 6) {
+                showError('reg-password-error');
+                return;
+            }
+            
+            // 验证确认密码
+            if (password !== confirmPwd) {
+                showError('reg-confirm-error');
+                return;
+            }
+            
+            // 检查用户名是否已存在
+            const users = getAllUsers();
+            if (users[username]) {
+                showError('reg-error');
+                return;
+            }
+            
+            // 保存用户
+            saveUser(username, password);
+            
+            // 提示注册成功并切换到登录
+            alert('注册成功！请登录');
+            switchAuthTab('login');
+            
+            // 清空注册表单
+            document.getElementById('reg-username').value = '';
+            document.getElementById('reg-password').value = '';
+            document.getElementById('reg-confirm').value = '';
+        }
+
+        // 登录
+        function login() {
+            hideAllErrorMsgs();
+            
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
+            
+            // 验证用户名
+            if (!username) {
+                showError('login-username-error');
+                return;
+            }
+            
+            // 验证密码
+            if (!password) {
+                showError('login-password-error');
+                return;
+            }
+            
+            // 检查用户信息
+            const users = getAllUsers();
+            if (!users[username] || users[username] !== password) {
+                showError('login-error');
+                return;
+            }
+            
+            // 登录成功
+            currentUser = username;
+            localStorage.setItem('loggedUser', username);
+            
+            // 刷新页面，初始化记账本
+            window.location.reload();
+        }
+
+        // 退出登录
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                localStorage.removeItem('loggedUser');
+                currentUser = null;
+                window.location.reload();
+            }
+        }
+
+        // 显示错误提示
+        function showError(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        // 初始化记账本应用
+        function initBillApp() {
+            // 设置默认日期为今天（仅添加账单的日期，筛选日期默认清空）
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('bill-date').value = today;
-            document.getElementById('filter-date').value = today;
 
+            // 初始化分类下拉框
+            initCategorySelectors();
+            
             // 加载账单数据并渲染
             loadBills();
             
@@ -339,67 +780,136 @@
             // 绑定筛选事件
             document.getElementById('filter-btn').addEventListener('click', filterBills);
             document.getElementById('reset-filter-btn').addEventListener('click', resetFilter);
-        });
-
-        // 从本地存储获取账单数据
-        function getBills() {
-            const billsStr = localStorage.getItem('bills');
-            return billsStr ? JSON.parse(billsStr) : [];
+            
+            // 绑定类型切换事件（收入/支出）
+            document.getElementById('bill-type').addEventListener('change', function() {
+                updateCategoryOptions(this.value);
+            });
         }
 
-        // 保存账单数据到本地存储
+        // 初始化分类下拉框
+        function initCategorySelectors() {
+            // 初始化添加账单的分类下拉框
+            updateCategoryOptions(document.getElementById('bill-type').value);
+            
+            // 初始化筛选的分类下拉框
+            const filterCategory = document.getElementById('filter-category');
+            // 清空现有选项（保留全部分类）
+            filterCategory.innerHTML = '<option value="">全部分类</option>';
+            
+            // 添加收入分类
+            const incomeGroup = document.createElement('optgroup');
+            incomeGroup.label = '收入分类';
+            categoryConfig.income.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.value;
+                option.textContent = item.text;
+                incomeGroup.appendChild(option);
+            });
+            
+            // 添加支出分类
+            const expenseGroup = document.createElement('optgroup');
+            expenseGroup.label = '支出分类';
+            categoryConfig.expense.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.value;
+                option.textContent = item.text;
+                expenseGroup.appendChild(option);
+            });
+            
+            filterCategory.appendChild(incomeGroup);
+            filterCategory.appendChild(expenseGroup);
+        }
+
+        // 更新分类下拉框选项
+        function updateCategoryOptions(type) {
+            const categorySelect = document.getElementById('bill-category');
+            // 清空现有选项
+            categorySelect.innerHTML = '';
+            
+            // 获取对应类型的分类
+            const categories = categoryConfig[type] || [];
+            
+            // 添加选项
+            categories.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.value;
+                option.textContent = item.text;
+                categorySelect.appendChild(option);
+            });
+        }
+
+        // 从本地存储获取当前用户的账单数据
+        function getBills() {
+            if (!currentUser) return [];
+            
+            const userBillsStr = localStorage.getItem(`bills_${currentUser}`);
+            return userBillsStr ? JSON.parse(userBillsStr) : [];
+        }
+
+        // 保存当前用户的账单数据到本地存储
         function saveBills(bills) {
-            localStorage.setItem('bills', JSON.stringify(bills));
+            if (!currentUser) return;
+            
+            localStorage.setItem(`bills_${currentUser}`, JSON.stringify(bills));
         }
 
         // 加载并渲染账单列表
-        function loadBills(filterDate = '') {
+        function loadBills(filterDate = '', filterCategory = '') {
             const bills = getBills();
             const billContainer = document.getElementById('bill-container');
             billContainer.innerHTML = '';
 
-            // 筛选账单（如果有筛选日期）
+            // 筛选账单（日期 + 分类）
             let filteredBills = bills;
             if (filterDate) {
-                filteredBills = bills.filter(bill => bill.date === filterDate);
+                filteredBills = filteredBills.filter(bill => bill.date === filterDate);
+            }
+            if (filterCategory) {
+                filteredBills = filteredBills.filter(bill => bill.category === filterCategory);
+            }
+            
+            // 按日期倒序排列（最新的在最上面）
+            filteredBills.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // 空数据判断
+            if (filteredBills.length === 0) {
+                billContainer.innerHTML = '<div class="empty-tip">暂无账单数据</div>';
+            } else {
+                // 渲染账单列表
+                filteredBills.forEach((bill, index) => {
+                    const billRow = document.createElement('div');
+                    billRow.className = 'bill-row';
+                    billRow.innerHTML = `
+                        <div class="col-date">${bill.date}</div>
+                        <div class="col-type" style="color: ${bill.type === 'income' ? '#059669' : '#e11d48'}">
+                            ${bill.type === 'income' ? '收入' : '支出'}
+                        </div>
+                        <div class="col-category">${bill.category}</div>
+                        <div class="col-amount" style="color: ${bill.type === 'income' ? '#059669' : '#e11d48'}">
+                            ¥${parseFloat(bill.amount).toFixed(2)}
+                        </div>
+                        <div class="col-desc">${bill.desc || '-'}</div>
+                        <div class="col-action">
+                            <button class="delete-btn" data-index="${bill.id}">删除</button>
+                        </div>
+                    `;
+                    billContainer.appendChild(billRow);
+                
+                    // 绑定删除事件
+                    billRow.querySelector('.delete-btn').addEventListener('click', function() {
+                        deleteBill(this.dataset.index);
+                    });
+                });
             }
 
             // 更新统计数据
             updateStats(filteredBills);
-
-            // 渲染账单列表
-            if (filteredBills.length === 0) {
-                billContainer.innerHTML = '<div class="empty-tip">暂无账单数据</div>';
-                return;
-            }
-
-            // 按日期倒序排列（最新的在最上面）
-            filteredBills.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            filteredBills.forEach((bill, index) => {
-                const billRow = document.createElement('div');
-                billRow.className = 'bill-row';
-                billRow.innerHTML = `
-                    <div class="col-date">${bill.date}</div>
-                    <div class="col-type" style="color: ${bill.type === 'income' ? '#059669' : '#e11d48'}">
-                        ${bill.type === 'income' ? '收入' : '支出'}
-                    </div>
-                    <div class="col-category">${bill.category}</div>
-                    <div class="col-amount" style="color: ${bill.type === 'income' ? '#059669' : '#e11d48'}">
-                        ¥${parseFloat(bill.amount).toFixed(2)}
-                    </div>
-                    <div class="col-desc">${bill.desc || '-'}</div>
-                    <div class="col-action">
-                        <button class="delete-btn" data-index="${bill.id}">删除</button>
-                    </div>
-                `;
-                billContainer.appendChild(billRow);
-
-                // 绑定删除事件
-                billRow.querySelector('.delete-btn').addEventListener('click', function() {
-                    deleteBill(this.dataset.index);
-                });
-            });
+            
+            // 更新图表（收入+支出+月度）
+            updateIncomeChart(filteredBills);
+            updateExpenseChart(filteredBills);
+            updateMonthlyChart(bills); // 月度统计使用全部数据，不受筛选影响
         }
 
         // 添加新账单
@@ -433,7 +943,10 @@
 
             // 保存并重新加载
             saveBills(bills);
-            loadBills(document.getElementById('filter-date').value);
+            // 获取当前筛选条件
+            const filterDate = document.getElementById('filter-date').value;
+            const filterCategory = document.getElementById('filter-category').value;
+            loadBills(filterDate, filterCategory);
 
             // 清空金额和备注输入框
             document.getElementById('bill-amount').value = '';
@@ -452,18 +965,23 @@
             bills = bills.filter(bill => bill.id !== billId);
 
             saveBills(bills);
-            loadBills(document.getElementById('filter-date').value);
+            // 获取当前筛选条件
+            const filterDate = document.getElementById('filter-date').value;
+            const filterCategory = document.getElementById('filter-category').value;
+            loadBills(filterDate, filterCategory);
         }
 
-        // 筛选账单
+        // 筛选账单 - 支持日期+分类筛选
         function filterBills() {
             const filterDate = document.getElementById('filter-date').value;
-            loadBills(filterDate);
+            const filterCategory = document.getElementById('filter-category').value;
+            loadBills(filterDate, filterCategory);
         }
 
         // 重置筛选
         function resetFilter() {
             document.getElementById('filter-date').value = '';
+            document.getElementById('filter-category').value = '';
             loadBills();
         }
 
@@ -487,6 +1005,327 @@
             document.getElementById('total-income').textContent = `¥${totalIncome.toFixed(2)}`;
             document.getElementById('total-expense').textContent = `¥${totalExpense.toFixed(2)}`;
             document.getElementById('total-balance').textContent = `¥${balance.toFixed(2)}`;
+        }
+
+        // 更新收入分类图表
+        function updateIncomeChart(bills) {
+            // 统计收入分类数据
+            const categoryData = {};
+            // 初始化所有收入分类为0
+            categoryConfig.income.forEach(item => {
+                categoryData[item.value] = 0;
+            });
+
+            // 只统计收入数据
+            const incomeBills = bills.filter(bill => bill.type === 'income');
+            incomeBills.forEach(bill => {
+                const amount = parseFloat(bill.amount);
+                if (categoryData.hasOwnProperty(bill.category)) {
+                    categoryData[bill.category] += amount;
+                }
+            });
+
+            // 过滤掉金额为0的分类
+            const labels = [];
+            const data = [];
+            const backgroundColors = [
+                '#4BC0C0', '#9966FF', '#36A2EB', '#FFCE56', '#FF9F40', '#C9CBCF'
+            ];
+
+            Object.keys(categoryData).forEach((category, index) => {
+                if (categoryData[category] > 0) {
+                    labels.push(category);
+                    data.push(categoryData[category]);
+                }
+            });
+
+            // 如果没有收入数据，显示提示
+            if (data.length === 0) {
+                document.getElementById('income-chart-container').innerHTML = 
+                    '<div class="chart-empty-tip">暂无收入数据，无法生成图表</div>';
+                if (incomeChart) {
+                    incomeChart.destroy();
+                    incomeChart = null;
+                }
+                return;
+            }
+
+            // 重新创建图表容器
+            document.getElementById('income-chart-container').innerHTML = '<canvas id="income-chart"></canvas>';
+            
+            // 创建/更新图表
+            const ctx = document.getElementById('income-chart').getContext('2d');
+            
+            // 如果已有图表实例，先销毁
+            if (incomeChart) {
+                incomeChart.destroy();
+            }
+
+            // 创建饼图
+            incomeChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '收入分类',
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        hoverBackgroundColor: backgroundColors
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                font: {
+                                    size: 12,
+                                    family: 'Microsoft YaHei'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ¥${value.toFixed(2)} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 更新支出分类图表
+        function updateExpenseChart(bills) {
+            // 统计支出分类数据
+            const categoryData = {};
+            // 初始化所有支出分类为0
+            categoryConfig.expense.forEach(item => {
+                categoryData[item.value] = 0;
+            });
+
+            // 只统计支出数据
+            const expenseBills = bills.filter(bill => bill.type === 'expense');
+            expenseBills.forEach(bill => {
+                const amount = parseFloat(bill.amount);
+                if (categoryData.hasOwnProperty(bill.category)) {
+                    categoryData[bill.category] += amount;
+                }
+            });
+
+            // 过滤掉金额为0的分类
+            const labels = [];
+            const data = [];
+            const backgroundColors = [
+                '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#C9CBCF'
+            ];
+
+            Object.keys(categoryData).forEach((category, index) => {
+                if (categoryData[category] > 0) {
+                    labels.push(category);
+                    data.push(categoryData[category]);
+                }
+            });
+
+            // 如果没有支出数据，显示提示
+            if (data.length === 0) {
+                document.getElementById('expense-chart-container').innerHTML = 
+                    '<div class="chart-empty-tip">暂无支出数据，无法生成图表</div>';
+                if (expenseChart) {
+                    expenseChart.destroy();
+                    expenseChart = null;
+                }
+                return;
+            }
+
+            // 重新创建图表容器
+            document.getElementById('expense-chart-container').innerHTML = '<canvas id="expense-chart"></canvas>';
+            
+            // 创建/更新图表
+            const ctx = document.getElementById('expense-chart').getContext('2d');
+            
+            // 如果已有图表实例，先销毁
+            if (expenseChart) {
+                expenseChart.destroy();
+            }
+
+            // 创建饼图
+            expenseChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '支出分类',
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        hoverBackgroundColor: backgroundColors
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                font: {
+                                    size: 12,
+                                    family: 'Microsoft YaHei'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ¥${value.toFixed(2)} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 更新月度收支统计图表
+        function updateMonthlyChart(bills) {
+            // 如果没有账单数据，显示提示
+            if (bills.length === 0) {
+                document.getElementById('monthly-chart-container').innerHTML = 
+                    '<div class="chart-empty-tip">暂无账单数据，无法生成月度统计图表</div>';
+                if (monthlyChart) {
+                    monthlyChart.destroy();
+                    monthlyChart = null;
+                }
+                return;
+            }
+
+            // 按月份统计收支数据
+            const monthlyData = {};
+            
+            // 遍历所有账单，按年月分组统计
+            bills.forEach(bill => {
+                const date = new Date(bill.date);
+                const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                const amount = parseFloat(bill.amount);
+                
+                // 初始化月份数据
+                if (!monthlyData[monthKey]) {
+                    monthlyData[monthKey] = {
+                        income: 0,
+                        expense: 0
+                    };
+                }
+                
+                // 累加收支金额
+                if (bill.type === 'income') {
+                    monthlyData[monthKey].income += amount;
+                } else {
+                    monthlyData[monthKey].expense += amount;
+                }
+            });
+
+            // 排序月份并提取数据
+            const sortedMonths = Object.keys(monthlyData).sort();
+            const monthLabels = sortedMonths.map(month => `${month.split('-')[0]}年${month.split('-')[1]}月`);
+            const incomeData = sortedMonths.map(month => monthlyData[month].income);
+            const expenseData = sortedMonths.map(month => monthlyData[month].expense);
+
+            // 重新创建图表容器
+            document.getElementById('monthly-chart-container').innerHTML = '<canvas id="monthly-chart"></canvas>';
+            
+            // 创建/更新图表
+            const ctx = document.getElementById('monthly-chart').getContext('2d');
+            
+            // 如果已有图表实例，先销毁
+            if (monthlyChart) {
+                monthlyChart.destroy();
+            }
+
+            // 创建柱状图
+            monthlyChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: monthLabels,
+                    datasets: [
+                        {
+                            label: '收入',
+                            data: incomeData,
+                            backgroundColor: '#059669',
+                            borderColor: '#047857',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '支出',
+                            data: expenseData,
+                            backgroundColor: '#e11d48',
+                            borderColor: '#be123c',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '金额 (元)',
+                                font: {
+                                    family: 'Microsoft YaHei'
+                                }
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '¥' + value.toFixed(0);
+                                },
+                                font: {
+                                    family: 'Microsoft YaHei'
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    family: 'Microsoft YaHei'
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 12,
+                                    family: 'Microsoft YaHei'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.dataset.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: ¥${value.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         }
     </script>
 </body>
