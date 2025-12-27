@@ -601,15 +601,25 @@
             }
         });
 
-        // 检查登录状态
+        // 【修复1：优化登录状态校验】
         function checkLoginStatus() {
-            const loggedUser = localStorage.getItem('loggedUser');
-            if (loggedUser) {
-                currentUser = loggedUser;
-                // 隐藏登录页，显示主界面
-                document.getElementById('auth-page').style.display = 'none';
-                document.getElementById('main-app').style.display = 'block';
-                document.getElementById('current-user').textContent = `当前用户：${currentUser}`;
+            try {
+                const loggedUser = localStorage.getItem('loggedUser');
+                // 额外校验用户是否存在（防止登录状态残留但用户数据被删除）
+                if (loggedUser && checkUserExists(loggedUser)) {
+                    currentUser = loggedUser;
+                    // 隐藏登录页，显示主界面
+                    document.getElementById('auth-page').style.display = 'none';
+                    document.getElementById('main-app').style.display = 'block';
+                    document.getElementById('current-user').textContent = `当前用户：${currentUser}`;
+                } else {
+                    // 清理无效的登录状态
+                    localStorage.removeItem('loggedUser');
+                    currentUser = null;
+                }
+            } catch (e) {
+                console.error('读取登录状态失败：', e);
+                currentUser = null;
             }
         }
 
@@ -655,20 +665,51 @@
             });
         }
 
-        // 获取所有用户
+        // 【修复2：健壮的用户数据读写函数】
+        // 获取所有用户（增加异常捕获）
         function getAllUsers() {
-            const usersStr = localStorage.getItem('users');
-            return usersStr ? JSON.parse(usersStr) : {};
+            try {
+                const usersStr = localStorage.getItem('users');
+                // 校验数据格式，防止解析失败
+                if (!usersStr || usersStr === 'undefined') return {};
+                const users = JSON.parse(usersStr);
+                // 确保返回的是对象
+                return typeof users === 'object' && !Array.isArray(users) ? users : {};
+            } catch (e) {
+                console.error('读取用户数据失败：', e);
+                // 重置损坏的用户数据
+                localStorage.setItem('users', '{}');
+                return {};
+            }
         }
 
-        // 保存用户信息
+        // 保存用户信息（增加确认存储成功的逻辑）
         function saveUser(username, password) {
-            const users = getAllUsers();
-            users[username] = password;
-            localStorage.setItem('users', JSON.stringify(users));
+            try {
+                const users = getAllUsers();
+                users[username] = password;
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // 验证存储是否成功
+                const savedUsers = getAllUsers();
+                if (savedUsers[username] !== password) {
+                    throw new Error('用户数据存储失败');
+                }
+                return true;
+            } catch (e) {
+                console.error('保存用户失败：', e);
+                alert('注册失败：本地存储不足，请清理浏览器缓存后重试');
+                return false;
+            }
         }
 
-        // 注册
+        // 【新增：检查用户是否存在】
+        function checkUserExists(username) {
+            const users = getAllUsers();
+            return !!users[username];
+        }
+
+        // 注册（优化存储校验）
         function register() {
             hideAllErrorMsgs();
             
@@ -695,14 +736,15 @@
             }
             
             // 检查用户名是否已存在
-            const users = getAllUsers();
-            if (users[username]) {
+            if (checkUserExists(username)) {
                 showError('reg-error');
                 return;
             }
             
-            // 保存用户
-            saveUser(username, password);
+            // 保存用户（增加存储结果校验）
+            if (!saveUser(username, password)) {
+                return;
+            }
             
             // 提示注册成功并切换到登录
             alert('注册成功！请登录');
@@ -714,7 +756,7 @@
             document.getElementById('reg-confirm').value = '';
         }
 
-        // 登录
+        // 登录（优化用户校验逻辑）
         function login() {
             hideAllErrorMsgs();
             
@@ -740,9 +782,14 @@
                 return;
             }
             
-            // 登录成功
+            // 登录成功（强制刷新localStorage写入）
             currentUser = username;
             localStorage.setItem('loggedUser', username);
+            // 立即验证登录状态
+            if (localStorage.getItem('loggedUser') !== username) {
+                alert('登录状态保存失败，请清理浏览器缓存后重试');
+                return;
+            }
             
             // 刷新页面，初始化记账本
             window.location.reload();
@@ -843,15 +890,27 @@
         function getBills() {
             if (!currentUser) return [];
             
-            const userBillsStr = localStorage.getItem(`bills_${currentUser}`);
-            return userBillsStr ? JSON.parse(userBillsStr) : [];
+            try {
+                const userBillsStr = localStorage.getItem(`bills_${currentUser}`);
+                if (!userBillsStr || userBillsStr === 'undefined') return [];
+                const bills = JSON.parse(userBillsStr);
+                return Array.isArray(bills) ? bills : [];
+            } catch (e) {
+                console.error('读取账单失败：', e);
+                return [];
+            }
         }
 
         // 保存当前用户的账单数据到本地存储
         function saveBills(bills) {
             if (!currentUser) return;
             
-            localStorage.setItem(`bills_${currentUser}`, JSON.stringify(bills));
+            try {
+                localStorage.setItem(`bills_${currentUser}`, JSON.stringify(bills));
+            } catch (e) {
+                console.error('保存账单失败：', e);
+                alert('账单保存失败：本地存储不足，请清理浏览器缓存后重试');
+            }
         }
 
         // 加载并渲染账单列表
